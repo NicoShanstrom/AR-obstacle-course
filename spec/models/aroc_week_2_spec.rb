@@ -36,9 +36,9 @@ describe 'ActiveRecord Obstacle Course, Week 2' do
     # ----------------------- Using Ruby -------------------------
     # orders = Order.all.sort_by { |order| order.amount }.reverse
     # ------------------------------------------------------------
-      orders = Order.order(amount: :desc)
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
+    orders = Order.order(amount: :desc)
     # ------------------------------------------------------------
 
     # Expectation
@@ -53,9 +53,10 @@ describe 'ActiveRecord Obstacle Course, Week 2' do
     ]
 
     # ----------------------- Using Ruby -------------------------
-    orders = Order.all.sort_by { |order| order.amount }
+    # orders = Order.all.sort_by { |order| order.amount }
     # ------------------------------------------------------------
-
+    # orders = Order.order("amount")
+    orders = Order.order(:amount)
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
     # ------------------------------------------------------------
@@ -72,11 +73,15 @@ describe 'ActiveRecord Obstacle Course, Week 2' do
     ]
 
     # ----------------------- Using Ruby -------------------------
-    items = Item.all.map { |item| item unless items_not_included.include?(item) }.compact
+    # items = Item.all.map { |item| item unless items_not_included.include?(item) }.compact
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
+    all_items = Item.all
+    items = all_items.excluding(items_not_included)
+    # items = Item.all.excluding(items_not_included)
+    # items = all_items.excluding(@item_2, @item_5, @item_6)
     # ------------------------------------------------------------
 
     # Expectation
